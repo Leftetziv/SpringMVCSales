@@ -8,5 +8,7 @@
     <body>
         <!--<h1>Hello from my first Spring MVC App!</h1>-->
         <h2>${mymessage}</h2>
+        <div><a href="${pageContext.request.contextPath}/customer">Customers</a></div>
+        
     </body>
 </html>
