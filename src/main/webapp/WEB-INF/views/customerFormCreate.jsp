@@ -17,16 +17,17 @@
             <table>                
                 <tr>
                     <th><label for="code">Code:</label></th>
-                    <th><input type="number" name="code" id="code"></th>
+                    <th><input type="number" name="ccode" id="ccode"></th>
                 </tr>               
                 <tr>
-                    <th><label for="code">Name:</label></th>
-                    <th><input type="text" name="name"></th>
+                    <th><label for="name">Name:</label></th>
+                    <th><input type="text" name="cname" id="cname"></th>
                 </tr> 
                 <tr>
-                    <th colspan="2"><input type="submit"></th>
+                    <th colspan="2"><input type="submit" value="Submit customer"></th>
                 </tr> 
             </table>
         </form>
-    </body>
+            
+     </body>
 </html>

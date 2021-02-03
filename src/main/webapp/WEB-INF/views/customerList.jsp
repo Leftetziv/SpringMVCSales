@@ -23,6 +23,7 @@
                     <tr>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>Deletion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,8 @@
                         <tr>
                             <td>${customer.ccode}</td>
                             <td>${customer.cname}</td>
+                            <td><a data-method="delete" href="${pageContext.request.contextPath}/customer/delete/${customer.ccode}">Delete</a></td>
+                            <td><a href="${pageContext.request.contextPath}/customer/update/${customer.ccode}">Update</a></td>
                         </tr>                        
                     </c:forEach>
                 </tbody>

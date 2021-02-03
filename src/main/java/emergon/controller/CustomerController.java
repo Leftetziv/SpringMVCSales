@@ -9,10 +9,12 @@ import emergon.entity.Customer;
 import emergon.service.CustomerService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,32 +26,62 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
-    
+
     @Autowired
     private CustomerService customerService;
-    
+
     @RequestMapping
     public ModelAndView showCustomers(ModelAndView modelAndView) {
 
         modelAndView.addObject("listOfCustomers", customerService.getCustomers());
         modelAndView.setViewName("customerList");
-        
+
         return modelAndView;
     }
-    
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String showForm() {
-        return "customerForm";
+    public String showFormCreate() {
+        return "customerFormCreate";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(Customer customer, Model model) {
+
+        customerService.addCustomer(customer);
+
+        model.addAttribute("listOfCustomers", customerService.getCustomers());
+
+        System.out.println(customer);
+        return "customerList";
+    }
+
+    @RequestMapping("/delete/{ccode}")
+    public String delete(@PathVariable(name = "ccode") int ccode, Model model) {
+        
+        customerService.delete(ccode);
+
+        model.addAttribute("listOfCustomers", customerService.getCustomers());
+        
+        return "customerList";
+    }
+
+    
+    @RequestMapping(value = "/update/{ccode}", method = RequestMethod.GET)
+    public String showFormUpdate(@PathVariable(name = "ccode") int ccode, Model model) {
+        
+        //vrisko ton customer me vasi to id
+        //ton vazo sto model gia na to parei i forma tou update kai na gemisei
+        
+        return "customerFormUpdate";
     }
     
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Customer customer, Model model) {//@ModelAttribute("customer") 
-        List<Customer> customers = customerService.getCustomers();
-        customers.add(customer);
-        
-        model.addAttribute("listOfCustomers", customers);
-        
-        System.out.println(customer);
+    @RequestMapping(value = "/update/{ccode}", method = RequestMethod.PUT)
+    public String delete(@PathVariable(name = "ccode") int ccode, Customer customer, Model model) {
+
+        customerService.update(ccode);
+
+        model.addAttribute("listOfCustomers", customerService.getCustomers());
+
         return "customerList";
     }
     
