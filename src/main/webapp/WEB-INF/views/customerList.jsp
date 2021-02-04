@@ -16,6 +16,8 @@
         <div><a href="${pageContext.request.contextPath}/">Home</a></div>
         <div><a href="${pageContext.request.contextPath}/customer/create">Add Customer</a></div>
 
+        <div><h3>${message}</h3></div>
+        
         <h1>Customer List:</h1>
         <div>
             <table>
@@ -30,7 +32,7 @@
                         <tr>
                             <td>${customer.ccode}</td>
                             <td>${customer.cname}</td>
-                            <td><a data-method="delete" href="${pageContext.request.contextPath}/customer/delete/${customer.ccode}">Delete</a></td>
+                            <td><a href="${pageContext.request.contextPath}/customer/delete/${customer.ccode}">Delete</a></td>
                             <td><a href="${pageContext.request.contextPath}/customer/update/${customer.ccode}">Update</a></td>
                         </tr>                        
                     </c:forEach>

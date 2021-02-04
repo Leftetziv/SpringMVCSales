@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -24,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    
+
     @Autowired
     private ProductService productService;
 
@@ -43,43 +44,42 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Product product, Model model) {
+    public String create(Product product, RedirectAttributes redirectAttributes) {
 
         productService.addProduct(product);
 
-        model.addAttribute("listOfProducts", productService.getProducts());
+        redirectAttributes.addFlashAttribute("message", "Successfull creation");
 
-        return "productList";
+        return "redirect:/product";
     }
 
     @RequestMapping("/delete/{pcode}")
     public String delete(@PathVariable(name = "pcode") int pcode, Model model) {
-        
+
         productService.delete(pcode);
 
         model.addAttribute("listOfProducts", productService.getProducts());
-        
+
         return "productList";
     }
 
-    
     @RequestMapping(value = "/update/{pcode}", method = RequestMethod.GET)
     public String showFormUpdate(@PathVariable(name = "pcode") int pcode, Model model) {
-                
+
         Product product = productService.getProduct(pcode);
-        
+
         model.addAttribute("productToEdit", product);
-        
+
         return "productFormUpdate";
     }
-    
-    @RequestMapping(value = "/update/{pcode}", method = RequestMethod.POST)
-    public String update(@PathVariable(name = "pcode") int pcode, Product product, Model model) {
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(Product product, RedirectAttributes redirectAttributes) {
+
+        productService.update(product);
+
+        redirectAttributes.addFlashAttribute("message", "Successfull update");
         
-        productService.update(product);      
-
-        model.addAttribute("listOfProducts", productService.getProducts());
-
-        return "productList";
+        return "redirect:/product";
     }
 }

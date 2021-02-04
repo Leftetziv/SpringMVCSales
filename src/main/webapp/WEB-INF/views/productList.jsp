@@ -16,6 +16,8 @@
         <div><a href="${pageContext.request.contextPath}/">Home</a></div>
         <div><a href="${pageContext.request.contextPath}/product/create">Add Product</a></div>
 
+        <div><h3>${message}</h3></div>
+        
         <h1>Product List:</h1>
         <div>
             <table>

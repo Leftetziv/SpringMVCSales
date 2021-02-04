@@ -20,11 +20,11 @@
                     <th><input type="number" name="pcode" id="pcode"></th>
                 </tr>               
                 <tr>
-                    <th><label for="pdescr">Name:</label></th>
+                    <th><label for="pdescr">Description:</label></th>
                     <th><input type="text" name="pdescr" id="pdescr"></th>
                 </tr> 
                 <tr>
-                    <th><label for="pprice">Name:</label></th>
+                    <th><label for="pprice">Price:</label></th>
                     <th><input type="number" name="pprice" id="pprice"></th>
                 </tr> 
                 <tr>

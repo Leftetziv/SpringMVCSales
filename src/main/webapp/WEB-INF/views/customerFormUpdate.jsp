@@ -13,11 +13,11 @@
     </head>
     <body>
         <h1>Update customer</h1>
-        <form method="POST" action="${pageContext.request.contextPath}/customer/update/${customerToEdit.ccode}">
+        <form method="POST" action="${pageContext.request.contextPath}/customer/update">
             <table
                 <tr>
                     <th><label for="ccode">Code:</label></th>
-                    <th><input type="number" name="ccode" id="ccode" value="${customerToEdit.ccode}" disabled ></th>
+                    <th><input type="number" name="ccode" id="ccode" value="${customerToEdit.ccode}" readonly="true" ></th>
                 </tr>               
                 <tr>
                     <th><label for="cname">Name:</label></th>

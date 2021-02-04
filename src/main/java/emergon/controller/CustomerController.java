@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -30,6 +31,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    //einai san na grafo @RequestMapping("/",  method = RequestMethod.GET)
     @RequestMapping
     public ModelAndView showCustomers(ModelAndView modelAndView) {
 
@@ -38,51 +40,52 @@ public class CustomerController {
 
         return modelAndView;
     }
-
+    
+    //gia get yparxei kai to @GetMapping
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showFormCreate() {
         return "customerFormCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Customer customer, Model model) {
+    public String create(Customer customer, RedirectAttributes redirectAttributes) {
 
         customerService.addCustomer(customer);
+        redirectAttributes.addFlashAttribute("message", "Successfull creation"); //minima gia na emfanisei sto proto load tou jsp me tous customers
 
-        model.addAttribute("listOfCustomers", customerService.getCustomers());
-
-        return "customerList";
+        //kano redirect allios meta to submit tis formas, an patiso redirect kanei pali post giati einai to teleutaio request pou ekane o xristis
+        return "redirect:/customer";
     }
 
     @RequestMapping("/delete/{ccode}")
     public String delete(@PathVariable(name = "ccode") int ccode, Model model) {
-        
+
         customerService.delete(ccode);
 
         model.addAttribute("listOfCustomers", customerService.getCustomers());
-        
+
         return "customerList";
     }
 
-    
     @RequestMapping(value = "/update/{ccode}", method = RequestMethod.GET)
-    public String showFormUpdate(@PathVariable(name = "ccode") int ccode, Model model) {
-                
+    public String showFormUpdate(@PathVariable(name = "ccode") int ccode, Model model) {        //an to estelna san parametro to eperna san @RequestParam
+
         Customer customer = customerService.getCustomer(ccode);
-        
+
         model.addAttribute("customerToEdit", customer);
-        
+
         return "customerFormUpdate";
     }
-    
-    @RequestMapping(value = "/update/{ccode}", method = RequestMethod.POST)
-    public String update(@PathVariable(name = "ccode") int ccode, Customer customer, Model model) {
-        
-        customerService.update(customer);      
 
-        model.addAttribute("listOfCustomers", customerService.getCustomers());
+    //gia post yparxei kai to @GetMapping
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(Customer customer, RedirectAttributes redirectAttributes) {
 
-        return "customerList";
+        customerService.update(customer);
+
+        redirectAttributes.addFlashAttribute("message", "Successfull updating"); //minima gia na emfanisei sto proto load tou jsp me tous customers
+
+        return "redirect:/customer";
     }
-    
+
 }
