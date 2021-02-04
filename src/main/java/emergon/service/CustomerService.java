@@ -36,10 +36,16 @@ public class CustomerService {
 
     public void delete(int ccode) {
         customers = customers.stream().filter(c -> c.getCcode() != ccode).collect(Collectors.toList());
-    }
+    }   
 
-    public void update(int ccode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Customer getCustomer(int ccode) {
+        return customers.stream().filter(c -> c.getCcode() == ccode).findFirst().get();
+    }    
+
+    public void update(Customer customer) {
+        int indexOf = customers.indexOf(customer);
+        
+        customers.set(indexOf, customer);
     }
 
 }

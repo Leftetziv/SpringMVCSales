@@ -13,9 +13,9 @@
         <title>Customer</title>
     </head>
     <body>
-        
+        <div><a href="${pageContext.request.contextPath}/">Home</a></div>
         <div><a href="${pageContext.request.contextPath}/customer/create">Add Customer</a></div>
-        
+
         <h1>Customer List:</h1>
         <div>
             <table>
@@ -23,7 +23,6 @@
                     <tr>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>Deletion</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -31,19 +31,18 @@ public class Product   {
     
     private String pdescr;
     
-    private BigDecimal pprice;
+    private double pprice;
 
     public Product() {
     }
 
-    public Product(Integer pcode) {
-        this.pcode = pcode;
-    }
-
-    public Product(Integer pcode, String pdescr) {
+    public Product(Integer pcode, String pdescr, double pprice) {
         this.pcode = pcode;
         this.pdescr = pdescr;
+        this.pprice = pprice;
     }
+
+   
 
     public Integer getPcode() {
         return pcode;
@@ -61,11 +60,11 @@ public class Product   {
         this.pdescr = pdescr;
     }
 
-    public BigDecimal getPprice() {
+    public double getPprice() {
         return pprice;
     }
 
-    public void setPprice(BigDecimal pprice) {
+    public void setPprice(double pprice) {
         this.pprice = pprice;
     }
 

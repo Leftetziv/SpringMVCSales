@@ -9,6 +9,7 @@
         <!--<h1>Hello from my first Spring MVC App!</h1>-->
         <h2>${mymessage}</h2>
         <div><a href="${pageContext.request.contextPath}/customer">Customers</a></div>
+        <div><a href="${pageContext.request.contextPath}/product">Products</a></div>
         
     </body>
 </html>

@@ -51,7 +51,6 @@ public class CustomerController {
 
         model.addAttribute("listOfCustomers", customerService.getCustomers());
 
-        System.out.println(customer);
         return "customerList";
     }
 
@@ -68,17 +67,18 @@ public class CustomerController {
     
     @RequestMapping(value = "/update/{ccode}", method = RequestMethod.GET)
     public String showFormUpdate(@PathVariable(name = "ccode") int ccode, Model model) {
+                
+        Customer customer = customerService.getCustomer(ccode);
         
-        //vrisko ton customer me vasi to id
-        //ton vazo sto model gia na to parei i forma tou update kai na gemisei
+        model.addAttribute("customerToEdit", customer);
         
         return "customerFormUpdate";
     }
     
-    @RequestMapping(value = "/update/{ccode}", method = RequestMethod.PUT)
-    public String delete(@PathVariable(name = "ccode") int ccode, Customer customer, Model model) {
-
-        customerService.update(ccode);
+    @RequestMapping(value = "/update/{ccode}", method = RequestMethod.POST)
+    public String update(@PathVariable(name = "ccode") int ccode, Customer customer, Model model) {
+        
+        customerService.update(customer);      
 
         model.addAttribute("listOfCustomers", customerService.getCustomers());
 
