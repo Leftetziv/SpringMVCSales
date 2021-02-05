@@ -11,6 +11,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Products</title>
+        <style>
+            table, td, th {
+                border: 1px solid black;
+                padding: 3px;
+            }
+
+            table {              
+                border-collapse: collapse;
+            }
+            
+            table a{
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
         <div><a href="${pageContext.request.contextPath}/">Home</a></div>
@@ -26,6 +40,8 @@
                         <th>Code</th>
                         <th>Description</th>              
                         <th>Price</th>              
+                        <th>Delete</th>              
+                        <th>Update</th>              
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +50,7 @@
                             <td>${product.pcode}</td>
                             <td>${product.pdescr}</td>
                             <td>${product.pprice}</td>
-                            <td><a data-method="delete" href="${pageContext.request.contextPath}/product/delete/${product.pcode}">Delete</a></td>
+                            <td><a href="${pageContext.request.contextPath}/product/delete/${product.pcode}">Delete</a></td>
                             <td><a href="${pageContext.request.contextPath}/product/update/${product.pcode}">Update</a></td>
                         </tr>                        
                     </c:forEach>
