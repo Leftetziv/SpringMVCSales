@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Leyteris
  */
-@Transactional
+@Transactional //xrisimopoiei to bean HibernateTransactionManager apo to DatabaseConfig, gia na min xreiazete na rythmizo ego ta transaxtions
 @Service
 public class CustomerService {
 
-    private List<Customer> customers; 
+//    private List<Customer> customers; 
     
     @Autowired
     private CustomerRepo customerRepo;

@@ -14,11 +14,12 @@
     <body>
         <h1>Create your customer</h1>
         <form method="POST" action="${pageContext.request.contextPath}/customer/create">
+            <input hidden="true" type="number" name="ccode" id="ccode">
             <table>                
-                <tr>
+<!--                <tr>
                     <th><label for="code">Code:</label></th>
-                    <th><input type="number" name="ccode" id="ccode" readonly="true"></th>
-                </tr>               
+                    <th><input type="number" name="ccode" id="ccode"></th>
+                </tr>               -->
                 <tr>
                     <th><label for="name">Name:</label></th>
                     <th><input type="text" name="cname" id="cname"></th>

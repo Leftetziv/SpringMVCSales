@@ -58,9 +58,7 @@ public class ProductController {
 
         productService.delete(pcode);
 
-        model.addAttribute("listOfProducts", productService.getProducts());
-
-        return "productList";
+        return "redirect:/product";
     }
 
     @RequestMapping(value = "/update/{pcode}", method = RequestMethod.GET)

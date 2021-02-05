@@ -39,19 +39,22 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "pcode")
     private Integer pcode;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "pdescr")
     private String pdescr;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Column(name = "pprice")
     private double pprice;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcode")
     private List<Sales> salesList;
 
