@@ -6,46 +6,59 @@
 package emergon.service;
 
 import emergon.entity.Customer;
+import emergon.repository.CustomerRepo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Leyteris
  */
+@Transactional
 @Service
 public class CustomerService {
 
     private List<Customer> customers; 
+    
+    @Autowired
+    private CustomerRepo customerRepo;
 
     public List<Customer> getCustomers() {
-        if (customers == null) {
-            customers = new ArrayList<>();
-            customers.add(new Customer(1, "fou"));
-            customers.add(new Customer(2, "bar"));
-            customers.add(new Customer(3, "foubar"));
-        }
-        return customers;
+        return customerRepo.findAll();
+        
+//        if (customers == null) {
+//            customers = new ArrayList<>();
+//            customers.add(new Customer(1, "fou"));
+//            customers.add(new Customer(2, "bar"));
+//            customers.add(new Customer(3, "foubar"));
+//        }
+//        return customers;
     }
 
     public void addCustomer(Customer customer) {
-        customers.add(customer);
+        customerRepo.save(customer);
+//        customers.add(customer);
     }
 
     public void delete(int ccode) {
-        customers = customers.stream().filter(c -> c.getCcode() != ccode).collect(Collectors.toList());
+        customerRepo.delete(Customer.class, ccode);
+//        customers = customers.stream().filter(c -> c.getCcode() != ccode).collect(Collectors.toList());
     }   
 
     public Customer getCustomer(int ccode) {
-        return customers.stream().filter(c -> c.getCcode() == ccode).findFirst().get();
+        return customerRepo.find(ccode);
+//        return customers.stream().filter(c -> c.getCcode() == ccode).findFirst().get();
     }    
 
     public void update(Customer customer) {
-        int indexOf = customers.indexOf(customer);
+        customerRepo.save(customer);
         
-        customers.set(indexOf, customer);
+//        int indexOf = customers.indexOf(customer);    
+//        customers.set(indexOf, customer);
     }
 
 }

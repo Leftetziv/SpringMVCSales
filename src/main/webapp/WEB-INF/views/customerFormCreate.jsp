@@ -17,7 +17,7 @@
             <table>                
                 <tr>
                     <th><label for="code">Code:</label></th>
-                    <th><input type="number" name="ccode" id="ccode"></th>
+                    <th><input type="number" name="ccode" id="ccode" readonly="true"></th>
                 </tr>               
                 <tr>
                     <th><label for="name">Name:</label></th>

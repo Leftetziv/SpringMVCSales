@@ -37,16 +37,19 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ccode")
     private Integer ccode;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "cname")
     private String cname;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ccode")
     private List<Sales> salesList;
 
