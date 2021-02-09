@@ -40,7 +40,7 @@ public class CustomerController {
     public ModelAndView showCustomers(ModelAndView modelAndView) {               
         
         modelAndView.addObject("listOfCustomers", customerService.getCustomers());
-        modelAndView.setViewName("customerList");
+        modelAndView.setViewName("customer/customerList");
 
         return modelAndView;
     }
@@ -48,7 +48,7 @@ public class CustomerController {
     //gia get yparxei kai to @GetMapping
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showFormCreate() {
-        return "customerFormCreate";
+        return "customer/customerFormCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -76,7 +76,7 @@ public class CustomerController {
 
         model.addAttribute("customerToEdit", customer);
 
-        return "customerFormUpdate";
+        return "customer/customerFormUpdate";
     }
 
     //gia post yparxei kai to @GetMapping

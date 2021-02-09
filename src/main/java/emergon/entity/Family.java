@@ -36,26 +36,32 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Family.findByFid", query = "SELECT f FROM Family f WHERE f.fid = :fid"),
     @NamedQuery(name = "Family.findByFname", query = "SELECT f FROM Family f WHERE f.fname = :fname"),
     @NamedQuery(name = "Family.findByFrelationship", query = "SELECT f FROM Family f WHERE f.frelationship = :frelationship"),
+    @NamedQuery(name = "Family.findBySalesman", query = "SELECT f FROM Family f WHERE f.salesman = :salesman"),
     @NamedQuery(name = "Family.findByDob", query = "SELECT f FROM Family f WHERE f.dob = :dob")})
 public class Family implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "fid")
     private Integer fid;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "fname")
     private String fname;
+
     @Size(max = 20)
     @Column(name = "frelationship")
     private String frelationship;
+
     @Column(name = "dob")
     @Temporal(TemporalType.DATE)
     private Date dob;
+
     @JoinColumn(name = "salesman", referencedColumnName = "scode")
     @ManyToOne
     private Salesman salesman;
@@ -136,5 +142,5 @@ public class Family implements Serializable {
     public String toString() {
         return "emergon.entity.Family[ fid=" + fid + " ]";
     }
-    
+
 }

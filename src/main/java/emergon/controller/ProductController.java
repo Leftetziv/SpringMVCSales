@@ -33,14 +33,14 @@ public class ProductController {
     public ModelAndView showProducts(ModelAndView modelAndView) {
 
         modelAndView.addObject("listOfProducts", productService.getProducts());
-        modelAndView.setViewName("productList");
+        modelAndView.setViewName("product/productList");
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showFormCreate() {
-        return "productFormCreate";
+        return "product/productFormCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -68,7 +68,7 @@ public class ProductController {
 
         model.addAttribute("productToEdit", product);
 
-        return "productFormUpdate";
+        return "product/productFormUpdate";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

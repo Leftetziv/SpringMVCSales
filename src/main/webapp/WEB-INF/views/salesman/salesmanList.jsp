@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib uri = "http://www.springframework.org/tags/form" prefix = "form" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,6 +43,7 @@
                         <th>Commission</th>
                         <th>Delete</th>              
                         <th>Update</th>   
+                        <th>Family</th>   
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +55,7 @@
                             <td>${salesman.scomm}</td>
                             <td><a href="${pageContext.request.contextPath}/salesman/delete/${salesman.scode}">Delete</a></td>
                             <td><a href="${pageContext.request.contextPath}/salesman/update/${salesman.scode}">Update</a></td>
+                            <td><a href="${pageContext.request.contextPath}/family/salesman/${salesman.scode}">Show Family</a></td>
                         </tr>                        
                     </c:forEach>
                 </tbody>

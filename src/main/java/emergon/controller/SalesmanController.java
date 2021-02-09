@@ -96,7 +96,7 @@ public class SalesmanController {
     public String update(@Valid @ModelAttribute("politis") Salesman salesman, BindingResult result, RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()){
-            return "salesman/salesmanFormCreate";
+            return "salesman/salesmanFormUpdate";
         }
         
         salesmanService.saveSalesman(salesman);
