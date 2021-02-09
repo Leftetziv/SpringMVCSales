@@ -26,31 +26,15 @@ public class SalesmanService {
     private SalesmanRepo salesmanRepo;
 
     public List<Salesman> getSalesmen() {
-        return salesmanRepo.findAll();
-        
+        return salesmanRepo.findAll();       
     }
 
     public void saveSalesman(Salesman salesman) {
         salesmanRepo.save(salesman);
     }
 
-    public void delete(int id) {
-        
-//        try{
-            salesmanRepo.delete(Salesman.class, id);
-//            return "ok";
-//        } catch(Exception ee) {
-//            return "error";
-//        }
-        
-//        boolean deleted = salesmanRepo.delete(Salesman.class, id);
-//        String msg;
-//        if (deleted) {
-//            msg = "Salesman deleted succesfully";
-//        } else {
-//            msg = "error";
-//        }
-//        return msg;
+    public void delete(int id) {       
+        salesmanRepo.delete(Salesman.class, id);
     }   
 
     public Salesman getSalesman(int id) {

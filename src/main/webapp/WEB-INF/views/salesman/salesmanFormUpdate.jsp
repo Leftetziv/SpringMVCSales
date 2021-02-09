@@ -4,6 +4,7 @@
     Author     : Leyteris
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://www.springframework.org/tags/form" prefix = "form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,35 +14,34 @@
     </head>
     <body>
         <h1>Update product</h1>
-        <form method="POST" action="${pageContext.request.contextPath}/salesman/update">
-            <input type="number" name="scode" id="scode" value="${salesmanToEdit.scode}" hidden="true">
+        <form:form modelAttribute="politis" method="POST" action="${pageContext.request.contextPath}/salesman/update">
+            <form:hidden path="scode"/>
             <table>
                 <tr>
-                    <th><label for="sname">Name</label></th>
-                    <th><input type="text" name="sname" id="sname" value="${salesmanToEdit.sname}"></th>
+                    <th><form:label path="sname">Name</form:label></th>
+                    <th><form:input path="sname"/></th>
                 </tr> 
                 <tr>
-                    <th><label for="scity">City</label></th>
-                    <th>
-                        <select name="scity" id="scity">
-                            <option value="${salesmanToEdit.scity}" selected="true">${salesmanToEdit.scity}</option>
+                    <th><form:label path="scity">City</form:label></th>
+                        <th>
+                        <form:select path="scity">
+                            <form:option  value="${politis.scity}" selected="true">${politis.scity}</form:option>
                             <c:forEach items="${listOfCities}"  var = "city">
-                                <c:if test="${salesmanToEdit.scity!=city}">
-                                    <option value="${city}">${city}</option>
+                                <c:if test="${politis.scity!=city}">
+                                    <form:option value="${city}">${city}</form:option>
                                 </c:if>
                             </c:forEach>
-                        </select>
+                        </form:select>
                     </th>
                 </tr> 
                 <tr>
-                    <th><label for="scomm">Commission</label></th>
-                    <th><input type="number" step="0.01" name="scomm" id="scomm" value="${salesmanToEdit.scomm}"></th>
+                    <th><form:label path="scomm">Commission</form:label></th>
+                    <th><form:input step="0.01" path="scomm"/></th>
                 </tr>
                 <tr>
                     <th colspan="2"><input type="submit" value="Update salesman"></th>
                 </tr> 
             </table>
-        </form>
-
+        </form:form>
     </body>
 </html>

@@ -11,12 +11,16 @@ import emergon.service.SalesmanService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,13 +50,24 @@ public class SalesmanController {
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String showFormCreate() {
+    public String showFormCreate(@ModelAttribute("politis") Salesman salesman) {
         return "salesman/salesmanFormCreate";
     }
+    //TO APOPANO EINAI SAN NA EKANA TO PARAKATO
+//    @RequestMapping(value = "/create", method = RequestMethod.GET)
+//    public String showFormCreate(Model model) {
+//        model.addAttribute("politis", new Salesman());
+//        return "salesman/salesmanFormCreate";
+//    }
+    
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Salesman salesman, RedirectAttributes redirectAttributes) {
+    public String create(@Valid @ModelAttribute("politis") Salesman salesman, BindingResult result,RedirectAttributes redirectAttributes) {
 
+        if (result.hasErrors()){
+            return "salesman/salesmanFormCreate";
+        }
+        
         salesmanService.saveSalesman(salesman);
         redirectAttributes.addFlashAttribute("message", "Successfull creation"); 
 
@@ -62,32 +77,28 @@ public class SalesmanController {
     @RequestMapping("/delete/{scode}")
     public String delete(@PathVariable(name = "scode") int scode, RedirectAttributes redirectAttributes) {
 
-        String msg;
-        try {
-            salesmanService.delete(scode);
-            msg = "ok";
-        } catch (Exception e) {
-            msg = "Error";
-        }
+        salesmanService.delete(scode);
         
-        redirectAttributes.addFlashAttribute("message", msg); 
-
         return "redirect:/salesman";
     }
 
     @RequestMapping(value = "/update/{scode}", method = RequestMethod.GET)
     public String showFormUpdate(@PathVariable(name = "scode") int scode, Model model) {      
 
-        Salesman customer = salesmanService.getSalesman(scode);
+        Salesman salesman = salesmanService.getSalesman(scode);
 
-        model.addAttribute("salesmanToEdit", customer);
+        model.addAttribute("politis", salesman);
 
         return "salesman/salesmanFormUpdate";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(Salesman salesman, RedirectAttributes redirectAttributes) {
+    public String update(@Valid @ModelAttribute("politis") Salesman salesman, BindingResult result, RedirectAttributes redirectAttributes) {
 
+        if (result.hasErrors()){
+            return "salesman/salesmanFormCreate";
+        }
+        
         salesmanService.saveSalesman(salesman);
 
         redirectAttributes.addFlashAttribute("message", "Successfull updating");
@@ -101,6 +112,20 @@ public class SalesmanController {
     @ModelAttribute(name = "listOfCities") 
     public List<String> getCities() {
         return salesmanService.getCities();
+    }
+    
+//    @ExceptionHandler(Exception.class)
+//    public String handleException(RedirectAttributes attributes) {
+//        String minima = "General Exception error!!";
+//        attributes.addFlashAttribute("message", minima);
+//        return "redirect:/salesman";
+//    }
+    
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public String handleDataIntegrityViolationException(RedirectAttributes attributes) {
+        String minima = "Could not commit transaction!!";
+        attributes.addFlashAttribute("message", minima);
+        return "redirect:/salesman";
     }
 
 }

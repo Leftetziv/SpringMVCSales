@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://www.springframework.org/tags/form" prefix = "form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,32 +14,36 @@
         <title>Salesman Creation</title>
     </head>
     <body>
-        <h1>Create your Salesman</h1>
-        <form method="POST" action="${pageContext.request.contextPath}/salesman/create">
+        <h1>Create your Salesman</h1>      
+        <form:form modelAttribute="politis" method="POST" action="${pageContext.request.contextPath}/salesman/create">
             <table>                
                 <tr>
                     <th><label for="sname">Name</label></th>
-                    <th><input type="text" name="sname" id="sname"></th>
+                    <th>
+                        <form:input path="sname"/>
+                        <form:errors path="sname"/>
+                    </th>
                 </tr> 
                 <tr>
                     <th><label for="scity">City</label></th>
                     <th>
-                        <select  name="scity" id="scity">
+                        <form:select path="scity" id="scity">
                             <c:forEach items="${listOfCities}" var="city">
-                                <option value="${city}">${city}</option>
+                                <form:option value="${city}">${city}</form:option>
                             </c:forEach>
-                        </select>
+                        </form:select>
+                        <form:errors path="scity"/>
                     </th>
                 </tr> 
                 <tr>
                     <th><label for="scomm">Commission</label></th>
-                    <th><input type="number" step="0.01" name="scomm" id="scomm"></th>
+                    <th><form:input path="scomm"/><form:errors path="scomm"/></th>
                 </tr> 
                 <tr>
                     <th colspan="2"><input type="submit" value="Submit salesman"></th>
                 </tr> 
             </table>
-        </form>
+        </form:form>
 
     </body>
 </html>
