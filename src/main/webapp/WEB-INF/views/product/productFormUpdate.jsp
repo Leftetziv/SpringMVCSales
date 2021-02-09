@@ -16,10 +16,6 @@
         <form method="POST" action="${pageContext.request.contextPath}/product/update">
             <input type="number" name="pcode" id="pcode" value="${productToEdit.pcode}" hidden="true">
             <table>
-<!--                <tr>
-                    <th><label for="pcode">Code:</label></th>
-                    <th><input type="number" name="pcode" id="pcode" value="${productToEdit.pcode}"></th>
-                </tr>               -->
                 <tr>
                     <th><label for="pdescr">Description:</label></th>
                     <th><input type="text" name="pdescr" id="pdescr" value="${productToEdit.pdescr}"></th>

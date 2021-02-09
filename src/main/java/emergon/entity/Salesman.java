@@ -44,19 +44,24 @@ public class Salesman implements Serializable {
     @Basic(optional = false)
     @Column(name = "scode")
     private Integer scode;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "sname")
     private String sname;
+    
     @Size(max = 15)
     @Column(name = "scity")
     private String scity;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "scomm")
-    private BigDecimal scomm;
+    private Double scomm;
+    
     @OneToMany(mappedBy = "salesman")
     private List<Family> familyList;
+    
     @OneToMany(mappedBy = "smcode")
     private List<Sales> salesList;
 
@@ -96,11 +101,11 @@ public class Salesman implements Serializable {
         this.scity = scity;
     }
 
-    public BigDecimal getScomm() {
+    public Double getScomm() {
         return scomm;
     }
 
-    public void setScomm(BigDecimal scomm) {
+    public void setScomm(Double scomm) {
         this.scomm = scomm;
     }
 

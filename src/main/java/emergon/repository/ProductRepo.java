@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Leyteris
  */
 @Repository
-public class ProductRepo extends HibernateUtil<Product> {
+public class ProductRepo extends HibernateUtil<Product>{
     
     public List<Product> findAll() {
         return super.findAll("Product.findAll");

@@ -15,11 +15,7 @@
         <h1>Update customer</h1>
         <form method="POST" action="${pageContext.request.contextPath}/customer/update">
             <input type="number" hidden="true" name="ccode" id="ccode" value="${customerToEdit.ccode}" readonly="true" >
-            <table>
-                <!--<tr>-->
-                    <!--<th><label for="ccode">Code:</label></th>-->
-                    <!--<th><input type="number" name="ccode" id="ccode" value="${customerToEdit.ccode}" readonly="true" ></th>-->
-                <!--</tr>-->               
+            <table>    
                 <tr>
                     <th><label for="cname">Name:</label></th>
                     <th><input type="text" name="cname" id="cname" value="${customerToEdit.cname}"></th>

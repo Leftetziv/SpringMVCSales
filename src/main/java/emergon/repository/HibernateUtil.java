@@ -8,8 +8,10 @@ package emergon.repository;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 /**
  *
@@ -58,9 +60,16 @@ public class HibernateUtil<E> {
     }
     
     public void delete(Class<E> type, int id){
+//        boolean deleted = true;
         session = getSession();
         E e = session.find(type, id);
-        session.remove(e);
+//        try{
+            session.remove(e);
+//        } catch (Exception xve) {
+//            System.err.println("cant delete");
+//            deleted = false;
+//        }
+
     }
         
 }

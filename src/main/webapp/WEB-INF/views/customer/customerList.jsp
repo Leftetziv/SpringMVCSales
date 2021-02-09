@@ -24,8 +24,6 @@
             table a{
                 text-decoration: none;
             }
-            
-            
         </style>
     </head>
     <body>
@@ -36,7 +34,7 @@
 
         <h1>Customer List:</h1>
         <div>
-            <table border="1" style="border-collapse: collapse;">
+            <table>
                 <thead>
                     <tr>
                         <th>Code</th>
